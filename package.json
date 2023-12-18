@@ -1,7 +1,7 @@
 {
     "name": "@oellan/robotic-mouse",
     "description": "A simple package to move and click in Windows with code.",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "author": {
         "name": "Oellan",
         "url": "https://github.com/oellan"

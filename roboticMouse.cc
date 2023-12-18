@@ -31,7 +31,7 @@ void UpdateScreenMetrics()
     vscreenMinY = GetSystemMetrics(SM_YVIRTUALSCREEN);
 }
 
-NAN_METHOD(MouseMove)
+NAN_METHOD(MoveMouse)
 {
     if (info.Length() != 2)
     {
@@ -91,8 +91,8 @@ NAN_MODULE_INIT(Init)
 
     Nan::Set(
         target,
-        Nan::New("mouseMove").ToLocalChecked(),
-        Nan::GetFunction(Nan::New<FunctionTemplate>(MouseMove)).ToLocalChecked());
+        Nan::New("moveMouse").ToLocalChecked(),
+        Nan::GetFunction(Nan::New<FunctionTemplate>(MoveMouse)).ToLocalChecked());
     Nan::Set(
         target,
         Nan::New("pressLeftClick").ToLocalChecked(),
