@@ -1,0 +1,33 @@
+{
+    "name": "@oellan/robotic-mouse",
+    "description": "A simple package to move and click in Windows with code.",
+    "version": "1.0.0",
+    "author": {
+        "name": "Oellan",
+        "url": "https://github.com/oellan"
+    },
+    "license": "MIT",
+    "main": "index.js",
+    "types": "index.d.ts",
+    "type": "commonjs",
+    "devDependencies": {
+        "bindings": "^1.5.0",
+        "nan": "^2.18.0",
+        "node-addon-api": "^7.0.0",
+        "node-gyp": "^10.0.1"
+    },
+    "scripts": {
+        "install": "node-gyp rebuild"
+    },
+    "gypfile": true,
+    "files": [
+        "./build/Release/roboticMouse.node",
+        "./index.d.ts",
+        "./index.js",
+        "./LICENSE",
+        "./package.json"
+    ],
+    "os": [
+        "win32"
+    ]
+}
