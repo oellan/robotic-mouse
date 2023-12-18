@@ -25,6 +25,8 @@
         "./index.d.ts",
         "./index.js",
         "./LICENSE",
+        "./binding.gyp",
+        "./roboticMouse.cc",
         "./package.json"
     ],
     "os": [
