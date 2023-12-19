@@ -85,6 +85,32 @@ NAN_METHOD(ReleaseLeftClick)
     info.GetReturnValue().Set(Nan::New(true));
 }
 
+NAN_METHOD(LeftClickAt)
+{
+    if (info.Length() != 2)
+    {
+        return Nan::ThrowError("Invalid number of argument");
+    }
+
+    int32_t x = Nan::To<int32_t>(info[0]).FromJust();
+    int32_t y = Nan::To<int32_t>(info[1]).FromJust();
+    size_t real_x = MOUSE_COORD_TO_ABS(x - vscreenMinX, vscreenWidth);
+    size_t real_y = MOUSE_COORD_TO_ABS(y - vscreenMinY, vscreenHeight);
+
+    INPUT input[1] = {};
+    ZeroMemory(input, sizeof(input));
+
+    input[0].type = INPUT_MOUSE;
+    input[0].mi.dx = real_x;
+    input[0].mi.dy = real_y;
+    input[0].mi.dwFlags = MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE | MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP | MOUSEEVENTF_VIRTUALDESK;
+    input[0].mi.time = 0;
+
+    SendInput(ARRAYSIZE(input), input, sizeof(input));
+
+    info.GetReturnValue().Set(Nan::New(true));
+}
+
 NAN_MODULE_INIT(Init)
 {
     UpdateScreenMetrics();
@@ -101,6 +127,10 @@ NAN_MODULE_INIT(Init)
         target,
         Nan::New("releaseLeftClick").ToLocalChecked(),
         Nan::GetFunction(Nan::New<FunctionTemplate>(ReleaseLeftClick)).ToLocalChecked());
+    Nan::Set(
+        target,
+        Nan::New("leftClickAt").ToLocalChecked(),
+        Nan::GetFunction(Nan::New<FunctionTemplate>(LeftClickAt)).ToLocalChecked());
 }
 
 NODE_MODULE(roboticMouse, Init)
